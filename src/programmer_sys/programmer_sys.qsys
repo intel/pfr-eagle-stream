@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system name="$${FILENAME}">
+ <component
+   name="$${FILENAME}"
+   displayName="$${FILENAME}"
+   version="1.0"
+   description=""
+   tags=""
+   categories="" />
+ <parameter name="bonusData"><![CDATA[bonusData 
+{
+   element clk50M_bridge
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+   element clk50M_reset_bridge
+   {
+      datum _sortIndex
+      {
+         value = "1";
+         type = "int";
+      }
+   }
+   element dual_boot_0
+   {
+      datum _sortIndex
+      {
+         value = "3";
+         type = "int";
+      }
+   }
+   element dual_boot_0.avalon
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "1048576";
+         type = "String";
+      }
+   }
+   element jtag_bridge
+   {
+      datum _sortIndex
+      {
+         value = "2";
+         type = "int";
+      }
+   }
+   element onchip_flash_0
+   {
+      datum _sortIndex
+      {
+         value = "4";
+         type = "int";
+      }
+   }
+   element onchip_flash_0.csr
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "1114112";
+         type = "String";
+      }
+   }
+   element onchip_flash_0.data
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+   }
+}
+]]></parameter>
+ <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
+ <parameter name="device" value="10M16SAU324I7G" />
+ <parameter name="deviceFamily" value="MAX 10" />
+ <parameter name="deviceSpeedGrade" value="7" />
+ <parameter name="fabricMode" value="QSYS" />
+ <parameter name="generateLegacySim" value="false" />
+ <parameter name="generationId" value="0" />
+ <parameter name="globalResetBus" value="false" />
+ <parameter name="hdlLanguage" value="VERILOG" />
+ <parameter name="hideFromIPCatalog" value="false" />
+ <parameter name="lockedInterfaceDefinition" value="" />
+ <parameter name="maxAdditionalLatency" value="1" />
+ <parameter name="projectName" value="" />
+ <parameter name="sopcBorderPoints" value="false" />
+ <parameter name="systemHash" value="0" />
+ <parameter name="testBenchDutName" value="" />
+ <parameter name="timeStamp" value="0" />
+ <parameter name="useTestBenchNamingPattern" value="false" />
+ <instanceScript></instanceScript>
+ <interface name="clk50m" internal="clk50M_bridge.in_clk" type="clock" dir="end" />
+ <interface
+   name="clk50m_reset"
+   internal="clk50M_reset_bridge.in_reset"
+   type="reset"
+   dir="end" />
+ <module
+   name="clk50M_bridge"
+   kind="altera_clock_bridge"
+   version="19.1"
+   enabled="1">
+  <parameter name="DERIVED_CLOCK_RATE" value="0" />
+  <parameter name="EXPLICIT_CLOCK_RATE" value="50000000" />
+  <parameter name="NUM_CLOCK_OUTPUTS" value="1" />
+ </module>
+ <module
+   name="clk50M_reset_bridge"
+   kind="altera_reset_bridge"
+   version="19.1"
+   enabled="1">
+  <parameter name="ACTIVE_LOW_RESET" value="1" />
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
+  <parameter name="NUM_RESET_OUTPUTS" value="1" />
+  <parameter name="SYNCHRONOUS_EDGES" value="deassert" />
+  <parameter name="USE_RESET_REQUEST" value="0" />
+ </module>
+ <module name="dual_boot_0" kind="altera_dual_boot" version="19.1" enabled="1">
+  <parameter name="CLOCK_FREQUENCY" value="50.0" />
+  <parameter name="INTENDED_DEVICE_FAMILY" value="MAX 10" />
+ </module>
+ <module
+   name="jtag_bridge"
+   kind="altera_jtag_avalon_master"
+   version="19.1"
+   enabled="1">
+  <parameter name="AUTO_DEVICE" value="10M16SAU324I7G" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="MAX 10" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7" />
+  <parameter name="COMPONENT_CLOCK" value="0" />
+  <parameter name="FAST_VER" value="0" />
+  <parameter name="FIFO_DEPTHS" value="2" />
+  <parameter name="PLI_PORT" value="50000" />
+  <parameter name="USE_PLI" value="0" />
+ </module>
+ <module
+   name="onchip_flash_0"
+   kind="altera_onchip_flash"
+   version="19.1"
+   enabled="1">
+  <parameter name="AUTO_CLOCK_RATE" value="50000000" />
+  <parameter name="CLOCK_FREQUENCY" value="50.0" />
+  <parameter name="CONFIGURATION_MODE">Dual Compressed Images</parameter>
+  <parameter name="CONFIGURATION_SCHEME">Internal Configuration</parameter>
+  <parameter name="DATA_INTERFACE" value="Parallel" />
+  <parameter name="DEVICE_FAMILY" value="MAX 10" />
+  <parameter name="PART_NAME" value="10M16SAU324I7G" />
+  <parameter name="READ_BURST_COUNT" value="8" />
+  <parameter name="READ_BURST_MODE" value="Incrementing" />
+  <parameter name="SECTOR_ACCESS_MODE">Read and write,Read and write,Read and write,Read and write,Read and write</parameter>
+  <parameter name="autoInitializationFileName">$${FILENAME}_onchip_flash_0</parameter>
+  <parameter name="initFlashContent" value="false" />
+  <parameter name="initializationFileName">altera_onchip_flash.hex</parameter>
+  <parameter name="initializationFileNameForSim">altera_onchip_flash.dat</parameter>
+  <parameter name="useNonDefaultInitFile" value="false" />
+ </module>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="jtag_bridge.master"
+   end="dual_boot_0.avalon">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00100000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="jtag_bridge.master"
+   end="onchip_flash_0.csr">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00110000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="jtag_bridge.master"
+   end="onchip_flash_0.data">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk50M_bridge.out_clk"
+   end="clk50M_reset_bridge.clk" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk50M_bridge.out_clk"
+   end="jtag_bridge.clk" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk50M_bridge.out_clk"
+   end="dual_boot_0.clk" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk50M_bridge.out_clk"
+   end="onchip_flash_0.clk" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk50M_reset_bridge.out_reset"
+   end="jtag_bridge.clk_reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk50M_reset_bridge.out_reset"
+   end="dual_boot_0.nreset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk50M_reset_bridge.out_reset"
+   end="onchip_flash_0.nreset" />
+ <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
+ <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
+</system>

@@ -1,0 +1,57 @@
+*** settings.bsp	2019-05-13 19:04:58.431925000 -0400
+--- settings.bsp.new	2019-05-13 19:09:31.529805000 -0400
+***************
+*** 883,908 ****
+          <LinkerRegion>
+                  <regionName>reset</regionName>
+                  <memoryName>u_ufm_data</memoryName>
+!                 <offset>CHANGE_TO_RESET_VECTOR_OFFSET_DEC</offset>
+                  <size>32</size>
+!                 <baseAddress>CHANGE_TO_RESET_VECTOR_BASE_HEX</baseAddress>
+!                 <addressRange>CHANGE_TO_RESET_VECTOR_RANGE_HEX</addressRange>
+          </LinkerRegion>
+          <LinkerRegion>
+                  <regionName>u_ufm_data</regionName>
+                  <memoryName>u_ufm_data</memoryName>
+!                 <offset>CHANGE_TO_DATA_OFFSET_DEC</offset>
+                  <size>65536</size>
+!                 <baseAddress>CHANGE_TO_DATA_BASE_HEX</baseAddress>
+!                 <addressRange>CHANGE_TO_DATA_RANGE_HEX</addressRange>
+          </LinkerRegion>
+          <LinkerRegion>
+                  <regionName>u_ufm_rodata</regionName>
+                  <memoryName>u_ufm_data</memoryName>
+!                 <offset>CHANGE_TO_RO_DATA_OFFSET_DEC</offset>
+                  <size>1024</size>
+!                 <baseAddress>CHANGE_TO_RO_DATA_BASE_HEX</baseAddress>
+!                 <addressRange>CHANGE_TO_RO_DATA_RANGE_HEX</addressRange>
+          </LinkerRegion>
+          <MemoryMap>
+                  <slaveDescriptor>u_nios_ram</slaveDescriptor>
+--- 883,908 ----
+          <LinkerRegion>
+                  <regionName>reset</regionName>
+                  <memoryName>u_ufm_data</memoryName>
+!                 <offset>684032</offset>
+                  <size>32</size>
+!                 <baseAddress>0x4A7000</baseAddress>
+!                 <addressRange>0x4A7000 - 0x4A701F</addressRange>
+          </LinkerRegion>
+          <LinkerRegion>
+                  <regionName>u_ufm_data</regionName>
+                  <memoryName>u_ufm_data</memoryName>
+!                 <offset>684064</offset>
+                  <size>65536</size>
+!                 <baseAddress>0x4A7020</baseAddress>
+!                 <addressRange>0x4A7020 - 0x4B701F</addressRange>
+          </LinkerRegion>
+          <LinkerRegion>
+                  <regionName>u_ufm_rodata</regionName>
+                  <memoryName>u_ufm_data</memoryName>
+!                 <offset>749600</offset>
+                  <size>1024</size>
+!                 <baseAddress>0x4B7020</baseAddress>
+!                 <addressRange>0x4B7020 - 0x4B741F</addressRange>
+          </LinkerRegion>
+          <MemoryMap>
+                  <slaveDescriptor>u_nios_ram</slaveDescriptor>

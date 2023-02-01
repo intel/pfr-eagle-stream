@@ -1,0 +1,92 @@
+*** pfr_core.sv	2019-07-24 11:44:12.814051000 -0400
+--- recovery_core.sv	2019-07-24 12:15:00.176230000 -0400
+***************
+*** 11,17 ****
+  // agreement for further details.
+  
+  
+! // pfr_core
+  //
+  // This module implements the toplevel of the PFR IP. It instantiates the
+  // Nios II system along with all of the other toplevel IPs such as SMBus
+--- 11,17 ----
+  // agreement for further details.
+  
+  
+! // recovery_core
+  //
+  // This module implements the toplevel of the PFR IP. It instantiates the
+  // Nios II system along with all of the other toplevel IPs such as SMBus
+***************
+*** 21,27 ****
+  `timescale 1 ps / 1 ps
+  `default_nettype none
+  
+! module pfr_core (
+      // Clocks and resets
+      input wire clk2M,
+      input wire clk50M,
+--- 21,27 ----
+  `timescale 1 ps / 1 ps
+  `default_nettype none
+  
+! module recovery_core (
+      // Clocks and resets
+      input wire clk2M,
+      input wire clk50M,
+***************
+*** 294,300 ****
+     ///////////////////////////////////////////////////////////////////////////
+      // Nios IIe system
+      ///////////////////////////////////////////////////////////////////////////
+!     pfr_sys u_pfr_sys(
+          // System clocks and synchronized resets. Note that sys_clk must be
+          // less than 80MHz as it is connected to the dual config IP, and that
+          // IP has a max frequency of 80MHz. 
+--- 294,300 ----
+     ///////////////////////////////////////////////////////////////////////////
+      // Nios IIe system
+      ///////////////////////////////////////////////////////////////////////////
+!     recovery_sys u_pfr_sys(
+          // System clocks and synchronized resets. Note that sys_clk must be
+          // less than 80MHz as it is connected to the dual config IP, and that
+          // IP has a max frequency of 80MHz. 
+***************
+*** 800,807 ****
+      ///////////////////////////////////////////////////////////////////////////
+      // RFNVRAM Master
+      ///////////////////////////////////////////////////////////////////////////
+! 
+!     rfnvram_smbus_master #(.FIFO_DEPTH(platform_defs_pkg::RFNVRAM_FIFO_SIZE), .CLOCK_PERIOD_PS(platform_defs_pkg::SYS_CLOCK_PERIOD_PS))
+      u_rfnvram_master (
+          .clk(rfnvram_avmm_clk),
+          .resetn(!rfnvram_avmm_areset),
+--- 800,810 ----
+      ///////////////////////////////////////////////////////////////////////////
+      // RFNVRAM Master
+      ///////////////////////////////////////////////////////////////////////////
+!     assign rfnvram_sda_oe = 1'b0;
+!     assign rfnvram_scl_oe = 1'b0;
+!     assign slave_portid = 3'b000;
+!     
+!     /*rfnvram_smbus_master #(.FIFO_DEPTH(platform_defs_pkg::RFNVRAM_FIFO_SIZE), .CLOCK_PERIOD_PS(platform_defs_pkg::SYS_CLOCK_PERIOD_PS))
+      u_rfnvram_master (
+          .clk(rfnvram_avmm_clk),
+          .resetn(!rfnvram_avmm_areset),
+***************
+*** 824,830 ****
+          .scl_in(rfnvram_scl_in),
+          .scl_oe(rfnvram_scl_oe)
+  
+!     );
+  
+      assign SMB_PFR_RFID_STBY_LVC3_SCL = (rfnvram_scl_oe && (slave_portid == 3'b000)) ? 1'b0 : 1'bz;
+      assign SMB_PFR_RFID_STBY_LVC3_SDA = (rfnvram_sda_oe && (slave_portid == 3'b000)) ? 1'b0 : 1'bz;
+--- 827,833 ----
+          .scl_in(rfnvram_scl_in),
+          .scl_oe(rfnvram_scl_oe)
+  
+!     );*/
+  
+      assign SMB_PFR_RFID_STBY_LVC3_SCL = (rfnvram_scl_oe && (slave_portid == 3'b000)) ? 1'b0 : 1'bz;
+      assign SMB_PFR_RFID_STBY_LVC3_SDA = (rfnvram_sda_oe && (slave_portid == 3'b000)) ? 1'b0 : 1'bz;

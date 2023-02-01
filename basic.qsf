@@ -1,0 +1,138 @@
+# Basic assignments common to all revisions
+
+# Quartus version
+set_global_assignment -name LAST_QUARTUS_VERSION "19.1.0 Standard Edition"
+
+# Device and family
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M50DAF484C7G 
+
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+
+# Device settings
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name INTERNAL_FLASH_UPDATE_MODE "DUAL IMAGES"
+
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
+set_global_assignment -name POWER_USE_DEVICE_CHARACTERISTICS MAXIMUM
+
+# JTAG SDC
+set_global_assignment -name SDC_FILE jtag.sdc
+
+# Power Settings
+set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "30 %"
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
+
+# Pacakages defining common parameters for all revisions
+set_global_assignment -name SYSTEMVERILOG_FILE platform_defs_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE gen_smbus_relay_config_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE gen_gpi_signals_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE gen_gpo_controls_pkg.sv
+
+# Common Core CPLD files
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/shim/Archer_City_Main_wrapper.sv
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/21_Thermal_Trip/genCntr.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/21_Thermal_Trip/ac_thermltrip_dly.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/20_ProcHot_MemHot/ac_prochot_memhot.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/11_common/ClkDiv.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/18_VR_Bypass/vr_bypass.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/19_MiscLogic/SmartLogic_fub.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/19_MiscLogic/MiscLogic.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/13_PSU_SW_Logic/counterSW.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/17_LED_Control/led_control.v
+# set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/1_PFR_Bypass/PFRBypass3.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/16_GlitchFilter/GlitchFilter2.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/16_GlitchFilter/GlitchFilter.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/13_PSU_SW_Logic/psu_sw_logic.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/13_PSU_SW_Logic/psu_s3_sw_ctrl.v
+# set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/12_IP/PLL/AC_PLL_CLK.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/11_common/SignalValidationDelay.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/11_common/ngsx.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/11_common/delay.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/11_common/counter2.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/11_common/HeartBeat.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/11_common/ffd_enable.v
+
+# set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/11_common/master_ngsx.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/10_ADR/adr_fub.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/10_ADR/adr_latch.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/9_Master_seq/master_fub.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/8_Pch_pwr_seq/ac_pch_seq.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/7_DDR5_pwrg_fail/ddr5_pwrgd_logic_modular.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/7_DDR5_pwrg_fail/ddr5_pwrgd_logic.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/7_DDR5_pwrg_fail/ddr5_pwrgd_logic_leds.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/6_Cpu_Mem_pwr_seq/ac_cpu_seq.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/5_Sys_Check/ac_sys_check.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/4_Bmc_Power_seq/ac_bmc_pwrseq_fsm.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/3_PSUonControl/psu_pwr_on_check.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/3_PSUonControl/counterPSU.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/2_PE_RST/perst.v
+# set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/1_PFR_Bypass/BidirBuffBus.v
+# set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/1_PFR_Bypass/BidirBuff.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/15_Postcodes/postcode_fub.v
+set_global_assignment -name VERILOG_FILE src/core_cpld/archer_city_fab3/src/14_Archer_City_TOP/Archer_City_Main/Archer_City_Main.v
+# set_global_assignment -name QIP_FILE src/core_cpld/archer_city_fab3/src/14_Archer_City_TOP/AC_PLL_CLK2.qip
+
+set_global_assignment -name QSYS_FILE src/core_cpld/archer_city_fab3/src/DbgCpuMem.qsys
+set_global_assignment -name QSYS_FILE src/core_cpld/archer_city_fab3/src/DbgPsuSeq.qsys
+set_global_assignment -name QSYS_FILE src/core_cpld/archer_city_fab3/src/DbgPchSeq.qsys
+set_global_assignment -name QSYS_FILE src/core_cpld/archer_city_fab3/src/DbgBmcSeq.qsys
+set_global_assignment -name QSYS_FILE src/core_cpld/archer_city_fab3/src/DbgFpgaRev.qsys
+# Missing file in GIT
+set_global_assignment -name QSYS_FILE src/core_cpld/archer_city_fab3/src/DbgPostCodes.qsys
+
+# TURN ON SECONDARY FPGA for Modular System Enablement
+set_global_assignment -name VERILOG_MACRO "SECONDARY_FPGA=1"
+
+# Additional assignment not cover in pinout.xlsx
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to SMB_PFR_PMBUS2_STBY_LVC3_R_SCL
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWRGD_FAIL_CPU0_AB_PLD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWRGD_FAIL_CPU0_CD_PLD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWRGD_FAIL_CPU0_EF_PLD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWRGD_FAIL_CPU0_GH_PLD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWRGD_FAIL_CPU1_AB_PLD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWRGD_FAIL_CPU1_CD_PLD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWRGD_FAIL_CPU1_EF_PLD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWRGD_FAIL_CPU1_GH_PLD
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to FM_ME_AUTHN_FAIL
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to FM_RST_PERST_BIT0
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to FM_RST_PERST_BIT1
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SMB_PCH_PMBUS2_STBY_LVC3_SDA
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SMB_PCH_PMBUS2_STBY_LVC3_SCL
+
+
+# Disabled auto global promotion so we can control this. That said PLLs are always global. Promoting the reset to global is also used since it is a high fanout signal.
+# It’s really signal and architecture dependent when choosing what should be a global.
+# Locally route the PLL lock
+set_instance_assignment -name GLOBAL_SIGNAL -to "pfr_sys_clocks_reset:u_pfr_sys_clocks_reset|sys_pll_ip:u_sys_pll_ip|altpll:altpll_component|sys_pll_ip_altpll:auto_generated|locked" OFF
+# Locally route the 3.3V good signal
+set_instance_assignment -name GLOBAL_SIGNAL -to PWRGD_P1V2_MAX10_AUX_PLD_R OFF
+
+# HACK: Locally route some internally derived clocks in the common core logic. These should be replaced with clock enables
+##############
+set_instance_assignment -name GLOBAL_SIGNAL -to "Archer_City_Main_wrapper:u_common_core|Archer_City_Main:mArcher_City_Main|ClkDiv:Ena125mSec|div_clk" OFF
+set_instance_assignment -name GLOBAL_SIGNAL -to "Archer_City_Main_wrapper:u_common_core|Archer_City_Main:mArcher_City_Main|ClkDiv:ClkLC|div_clk" OFF
+set_instance_assignment -name GLOBAL_SIGNAL -to "Archer_City_Main_wrapper:u_common_core|Archer_City_Main:mArcher_City_Main|GlitchFilter:mGlitchFilter_PLD_BUTTON|rFilteredSignals[0]" OFF
+##############
+
+
+# SMBus relay/filter files
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_filtered_relay/smbus_filtered_relay.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/common/async_input_filter.sv
+

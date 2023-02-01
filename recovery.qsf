@@ -1,0 +1,153 @@
+source basic.qsf
+
+set_global_assignment -name TOP_LEVEL_ENTITY recovery_top
+
+# Enable agressive area optimizations
+set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE AREA"
+
+# Revision specific source files
+set_global_assignment -name QIP_FILE src/recovery_sys/recovery_sys/synthesis/recovery_sys.qip
+set_global_assignment -name QIP_FILE src/top_ip/sys_pll_spi_20mhz/sys_pll_ip.qip
+set_global_assignment -name QIP_FILE src/top_ip/int_osc_ip/synthesis/int_osc_ip.qip
+
+set_global_assignment -name SYSTEMVERILOG_FILE src/pfr_sys_clocks_reset.sv
+set_global_assignment -name SYSTEMVERILOG_FILE recovery_core.sv
+set_global_assignment -name SYSTEMVERILOG_FILE recovery_top.sv
+set_global_assignment -name VERILOG_FILE src/common/synchronizer.v
+
+# SPI related files
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_control.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_filter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/altera_avalon_sc_fifo.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/altera_merlin_arbitrator.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/avst_fifo.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/inf_sc_fifo_ser_data.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/intel_generic_serial_flash_interface_addr.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/intel_generic_serial_flash_interface_asmiblock.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/intel_generic_serial_flash_interface_cmd.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/intel_generic_serial_flash_interface_csr.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/qspi_inf_mux.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/spi_master_spi_master_merlin_demultiplexer_0.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/spi_master_spi_master_multiplexer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/spi_master_spi_master_qspi_inf_inst_qspi_inf_mux_qspi_inf_mux.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/spi_master_spi_master_qspi_inf_inst.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/spi_master_spi_master.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/spi_control/spi_master/spi_master_spi_master_xip_controller.sv
+
+# Crypto block
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/crypto_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/sha_round_top.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/sigma0.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/sha_top.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/sha_unit.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/sha_round.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/sigma1.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/sha_scheduler_top.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/csa_64.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/sha_scheduler.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/ch.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/maj.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/kt.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/sha/hin_init.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa384/crypto_mem2_be.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa384/crypto_mem3.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa384/crypto_mem4_be.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa384/csl_add_sub_393.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa384/ecdsa384_top.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa384/mult_384x9.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa384/multr_all_384x384.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa384/ocs_ecp384_ad_jpc.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa256/csl_add_sub_265.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa256/ecdsa256_top.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa256/mult_256x9.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa256/multr_all_256x256.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/ecdsa256/ocs_ecp256_ad_jpc.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/entropy_source/entropy_source.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/entropy_source/max10_trng_entropy.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/entropy_source/max10_trng_entropy_race.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/entropy_source/max10_trng_entropy_health.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/entropy_source/max10_trng_entropy_adjust.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto/entropy_source/adaptive_proportion_test.sv
+
+# Crypto dma
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto_dma/crypto_dma.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto_dma/dma_read.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto_dma/dma_csr.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto_dma/dma_data_buffer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto_dma/dma_dcfifo.v
+set_global_assignment -name SYSTEMVERILOG_FILE src/crypto_dma/dma_sha_write.sv
+
+# SMBus verilog assignments
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_avl_mst_intf_gen.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_clk_cnt.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_condt_det.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_databuffer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_rxshifter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_slave.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_slvfsm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_spksupp.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_txout.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_txshifter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/i2c_slave/i2c_crc8_d8.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/smbus_mailbox.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/reg_file.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/dp_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/address_protector.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/fifo.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/smbus_mailbox/sp_ram.sv
+
+# RFNVRAM verilog assignments
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/rfnvram_smbus_master.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_clk_cnt.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_condt_det.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_condt_gen.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_csr.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_fifo.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_master.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_mstfsm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_spksupp.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_txout.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_txshifter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/rfnvram_smbus_master/i2c_master/i2c_rxshifter.sv
+
+# Timer bank
+set_global_assignment -name SYSTEMVERILOG_FILE src/timer_bank/timer_bank.sv
+set_global_assignment -name SDC_FILE pfr.sdc
+
+# Platform specific pin assignments
+source gen_asgns.qsf
+
+# LogicLock on entropy source's racing circuits
+set_global_assignment -name LL_ENABLED ON -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_AUTO_SIZE OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_STATE FLOATING -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_RESERVED OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_CORE_ONLY OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_SECURITY_ROUTING_INTERFACE OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_IGNORE_IO_BANK_SECURITY_CONSTRAINT OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_PR_REGION OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_ROUTING_REGION_EXPANSION_SIZE 2147483647 -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_WIDTH 3 -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_HEIGHT 4 -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_ORIGIN X1_Y1 -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_instance_assignment -name LL_MEMBER_OF "max10_trng_entropy_race:u_trng_entropy_race_1" -to "recovery_core:u_core|crypto_top:u_crypto|entropy_source:u_entropy_source|max10_trng_entropy:entropy_source_inst|max10_trng_entropy_race:u_trng_entropy_race_1" -section_id "max10_trng_entropy_race:u_trng_entropy_race_1"
+set_global_assignment -name LL_ENABLED ON -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_AUTO_SIZE OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_STATE FLOATING -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_RESERVED OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_CORE_ONLY OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_SECURITY_ROUTING_INTERFACE OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_IGNORE_IO_BANK_SECURITY_CONSTRAINT OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_PR_REGION OFF -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_ROUTING_REGION_EXPANSION_SIZE 2147483647 -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_WIDTH 3 -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_HEIGHT 5 -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_global_assignment -name LL_ORIGIN X1_Y1 -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_instance_assignment -name LL_MEMBER_OF "max10_trng_entropy_race:u_trng_entropy_race_2" -to "recovery_core:u_core|crypto_top:u_crypto|entropy_source:u_entropy_source|max10_trng_entropy:entropy_source_inst|max10_trng_entropy_race:u_trng_entropy_race_2" -section_id "max10_trng_entropy_race:u_trng_entropy_race_2"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+
+#### There should be no assignments after this line
+

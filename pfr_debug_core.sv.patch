@@ -1,0 +1,55 @@
+*** pfr_core.sv	2020-12-16 17:32:00.165509000 +0800
+--- pfr_debug_core.sv	2020-12-16 17:37:51.916505000 +0800
+***************
+*** 11,17 ****
+  // agreement for further details.
+  
+  
+! // pfr_core
+  //
+  // This module implements the toplevel of the PFR IP. It instantiates the
+  // Nios II system along with all of the other toplevel IPs such as SMBus
+--- 11,17 ----
+  // agreement for further details.
+  
+  
+! // pfr_debug_core
+  //
+  // This module implements the toplevel of the PFR IP. It instantiates the
+  // Nios II system along with all of the other toplevel IPs such as SMBus
+***************
+*** 21,27 ****
+  `timescale 1 ps / 1 ps
+  `default_nettype none
+  
+! module pfr_core (
+      // Clocks and resets
+      input wire clk2M,
+      input wire clk50M,
+--- 21,27 ----
+  `timescale 1 ps / 1 ps
+  `default_nettype none
+  
+! module pfr_debug_core (
+      // Clocks and resets
+      input wire clk2M,
+      input wire clk50M,
+***************
+*** 811,818 ****
+      logic [3:0]                          pch_spi_master_data_out;       // data signals driven to the SPI data pins
+      logic [3:0]                          pch_spi_master_data_oe;        // when asserted, pch_spi_data drives the respective PCH SPI data pin
+      
+!     localparam  BMC_ENABLE_COMMAND_LOG = 0;
+!     localparam  PCH_ENABLE_COMMAND_LOG = 0;
+      
+      spi_control #(
+          .BMC_IBB_ADDRESS_MSBS       ( platform_defs_pkg::BMC_IBB_ADDRESS_MSBS   ),
+--- 811,818 ----
+      logic [3:0]                          pch_spi_master_data_out;       // data signals driven to the SPI data pins
+      logic [3:0]                          pch_spi_master_data_oe;        // when asserted, pch_spi_data drives the respective PCH SPI data pin
+      
+!     localparam  BMC_ENABLE_COMMAND_LOG = 1;
+!     localparam  PCH_ENABLE_COMMAND_LOG = 1;
+      
+      spi_control #(
+          .BMC_IBB_ADDRESS_MSBS       ( platform_defs_pkg::BMC_IBB_ADDRESS_MSBS   ),

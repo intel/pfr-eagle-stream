@@ -1,0 +1,21 @@
+source basic.qsf
+
+set_global_assignment -name TOP_LEVEL_ENTITY non_pfr_top
+
+# Revision specific source files
+set_global_assignment -name QIP_FILE src/top_ip/sys_pll_slow/sys_pll_ip.qip
+set_global_assignment -name QIP_FILE src/top_ip/adc_pll/adc_pll_ip.qip
+set_global_assignment -name QIP_FILE src/top_ip/int_osc_ip/synthesis/int_osc_ip.qip
+set_global_assignment -name QIP_FILE src/top_ip/dual_config_ip/synthesis/dual_config_ip.qip
+set_global_assignment -name SYSTEMVERILOG_FILE src/pfr_sys_clocks_reset.sv
+set_global_assignment -name SYSTEMVERILOG_FILE non_pfr_top.sv
+set_global_assignment -name VERILOG_FILE src/common/synchronizer.v
+set_global_assignment -name SYSTEMVERILOG_FILE non_pfr_core.sv
+
+set_global_assignment -name SDC_FILE non_pfr.sdc
+
+# Platform specific pin assignments
+source gen_asgns.qsf
+
+#### There should be no assignments after this line
+
